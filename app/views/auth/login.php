@@ -9,7 +9,8 @@ use Helpers\Form;
     	  <div class="modal-dialog">
 				<div class="loginmodal-container">
 					<h1>Login to Your Account</h1><br>
-<?php echo Error::display($error); ?>
+<?php echo Error::displayError($error); ?>
+<?php echo Error::displaySuccess($success); ?>
 
 <?php echo Form::open(array('method' => 'post'));?>
 

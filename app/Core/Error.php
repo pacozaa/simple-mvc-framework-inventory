@@ -19,15 +19,17 @@ class Error extends Controller
      * @var string
      */
     private $error = null;
+    private $success = null;
 
     /**
      * save error to $this->_error
      * @param string $error
      */
-    public function __construct($error)
+    public function __construct($error, $success)
     {
         parent::__construct();
         $this->error = $error;
+        $this->success = $success;
     }
 
     /**
@@ -51,7 +53,7 @@ class Error extends Controller
      * @param  string $class name of class to apply to div
      * @return string        return the errors inside divs
      */
-    public static function display($error, $class = 'alert alert-danger')
+    public static function displayError($error, $class = 'alert alert-danger')
     {
         if (is_array($error)) {
             foreach ($error as $error) {
@@ -61,6 +63,19 @@ class Error extends Controller
         } else {
             if (isset($error)) {
                 return "<div class='$class'>$error</div>";
+            }
+        }
+    }
+    public static function displaySuccess($success, $class = 'alert alert-success')
+    {
+        if (is_array($success)) {
+            foreach ($success as $success) {
+                $row.= "<div class='$class'>$success</div>";
+            }
+            return $row;
+        } else {
+            if (isset($success)) {
+                return "<div class='$class'>$success</div>";
             }
         }
     }

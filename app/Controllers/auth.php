@@ -23,6 +23,8 @@ class Auth extends Controller{
 	public function login(){	
 		Hooks::addHook('js', 'Controllers\auth@js');
 		Hooks::addHook('css', 'Controllers\auth@css');
+		$error = 'hi';
+		$success = 'hi';
 		if(Session::get('loggedin')){
             Url::redirect();
         }	
@@ -42,13 +44,13 @@ class Auth extends Controller{
 				$data = array('lastLogin' => date('Y-m-d G:i:s'));
 				$where = array('memberID' => $this->_model->getID($username));
 				$this->_model->update($data,$where);
-
+				$error = 'hi';
 				Url::redirect();
 			}
 		}
 		$data['title'] = 'Login';
 		View::rendertemplate('header',$data);
-		View::render('auth/login',$data,$error);
+		View::render('auth/login',$data,$error,$success);
 		View::rendertemplate('footer',$data);
 	}
 	public function logout(){
